@@ -20,10 +20,10 @@ env/
 .env
 
 # Data files
-data/
+/data/
 
 # Results
-results/
+/results/
 
 # Jupyter
 .ipynb_checkpoints/
