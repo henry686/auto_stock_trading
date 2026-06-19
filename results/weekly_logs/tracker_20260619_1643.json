@@ -1,0 +1,93 @@
+[
+  {
+    "symbol": "600036",
+    "name": "招商银行",
+    "initial_value": 100000,
+    "current_value": 131728.97924999997,
+    "total_return": 0.3172897924999997,
+    "max_drawdown": -0.04721619789999997,
+    "week_return": 0.024164020660727367,
+    "trades": 96,
+    "current_cash": 1066.9792499999894,
+    "last_signal": "2022-12-30 买入",
+    "last_update": "2026-06-19T16:43:26.232696"
+  },
+  {
+    "symbol": "002594",
+    "name": "比亚迪",
+    "initial_value": 100000,
+    "current_value": 545408.96175,
+    "total_return": 4.4540896175,
+    "max_drawdown": -0.07551514749999988,
+    "week_return": 0.0,
+    "trades": 87,
+    "current_cash": 545408.96175,
+    "last_signal": "2022-12-22 卖出",
+    "last_update": "2026-06-19T16:43:28.851435"
+  },
+  {
+    "symbol": "300750",
+    "name": "宁德时代",
+    "initial_value": 100000,
+    "current_value": 239984.0,
+    "total_return": 1.39984,
+    "max_drawdown": -0.3159045249999998,
+    "week_return": 0.012313765125335895,
+    "trades": 73,
+    "current_cash": 239984.0,
+    "last_signal": "2022-12-26 卖出",
+    "last_update": "2026-06-19T16:43:30.621951"
+  },
+  {
+    "symbol": "601318",
+    "name": "中国平安",
+    "initial_value": 100000,
+    "current_value": 105660.74775999994,
+    "total_return": 0.0566074775999994,
+    "max_drawdown": -0.10332031820000062,
+    "week_return": 0.0,
+    "trades": 92,
+    "current_cash": 105660.74775999994,
+    "last_signal": "2022-12-23 卖出",
+    "last_update": "2026-06-19T16:43:33.269734"
+  },
+  {
+    "symbol": "000858",
+    "name": "五粮液",
+    "initial_value": 100000,
+    "current_value": 291417.8365,
+    "total_return": 1.9141783649999997,
+    "max_drawdown": -0.04854854999999996,
+    "week_return": 0.0021665280349510083,
+    "trades": 80,
+    "current_cash": 5217.836500000005,
+    "last_signal": "2022-12-30 买入",
+    "last_update": "2026-06-19T16:43:35.944872"
+  },
+  {
+    "symbol": "600900",
+    "name": "长江电力",
+    "initial_value": 100000,
+    "current_value": 107346.83131000002,
+    "total_return": 0.07346831310000024,
+    "max_drawdown": -0.024350822800000022,
+    "week_return": 0.0,
+    "trades": 105,
+    "current_cash": 107346.83131000002,
+    "last_signal": "2022-12-09 卖出",
+    "last_update": "2026-06-19T16:43:38.570756"
+  },
+  {
+    "symbol": "002415",
+    "name": "海康威视",
+    "initial_value": 100000,
+    "current_value": 213515.22675000003,
+    "total_return": 1.1351522675000003,
+    "max_drawdown": -0.024948300000000017,
+    "week_return": 0.0015949320433876351,
+    "trades": 84,
+    "current_cash": 1355.2267500000307,
+    "last_signal": "2022-12-30 买入",
+    "last_update": "2026-06-19T16:43:41.206990"
+  }
+]
