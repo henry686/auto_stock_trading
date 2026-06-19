@@ -31,11 +31,50 @@ REPORT_DIR = Path("results/weekly_logs")
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def run_weekly_simulation(symbol, name, cash=100_000):
-    """跑单只股票模拟并返回摘要"""
-    df = load_from_parquet(symbol)
-    df = add_all_indicators(df)
+def _run_index_sim(df, name, cash=100_000):
+    """指数简化模拟: 忽略手数，直接按涨跌算"""
+    import numpy as np
+    strategy = MACrossoverStrategy(short_period=5, long_period=20)
+    signals = strategy.generate_signals(df)
+    positions = strategy.get_positions(df)
 
+    daily_ret = df["close"].pct_change().fillna(0)
+    strategy_ret = daily_ret * positions.shift(1).fillna(0)
+    equity = (1 + strategy_ret).cumprod() * cash
+
+    peak = equity.expanding().max()
+    dd = ((equity - peak) / peak).min()
+
+    last_signal_row = signals[signals["signal"] != 0]
+    last_sig = "无信号"
+    if not last_signal_row.empty:
+        r = last_signal_row.iloc[-1]
+        last_sig = f"{r['date'].date()} {'买入' if r['signal'] == 1 else '卖出'}"
+
+    return {
+        "symbol": "000300", "name": name,
+        "initial_value": cash,
+        "current_value": equity.iloc[-1],
+        "total_return": (equity.iloc[-1] - cash) / cash,
+        "max_drawdown": dd,
+        "week_return": (equity.iloc[-1] - equity.iloc[-5]) / equity.iloc[-5] if len(equity) >= 5 else 0,
+        "trades": (signals["signal"] != 0).sum(),
+        "current_cash": cash * (1 - positions.iloc[-1]),
+        "positions": {name: int(positions.iloc[-1] * cash / df["close"].iloc[-1])} if positions.iloc[-1] else {},
+        "last_signal": last_sig,
+        "last_update": datetime.now().isoformat(),
+    }
+
+
+def run_weekly_simulation(symbol, name, cash=100_000):
+    """跑单只股票或指数模拟并返回摘要"""
+    df = load_from_parquet(symbol)
+
+    if symbol == "000300":
+        # 指数: 用简化版，不按手交易
+        return _run_index_sim(df, name, cash)
+
+    df = add_all_indicators(df)
     strategy = MACrossoverStrategy(short_period=5, long_period=20)
     engine = SimulationEngine(initial_cash=cash)
     engine.load_data(symbol, df)
