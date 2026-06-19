@@ -17,9 +17,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import pandas as pd
-import numpy as np
 import json
-from datetime import datetime, date
+from datetime import datetime
 
 from src.data.storage import load_from_parquet
 from src.indicators.calculator import add_all_indicators

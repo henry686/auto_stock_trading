@@ -1,7 +1,9 @@
 """
-全局配置
+全局配置 — 路径、观察池、可视化参数
+交易规则常量请见 ashare_rules.py
 """
 from pathlib import Path
+from .ashare_rules import INITIAL_CAPITAL  # 单一数据源
 
 # 项目根目录
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -19,9 +21,6 @@ REPORTS_DIR = RESULTS_DIR / "reports"
 # 默认日期范围
 DEFAULT_START_DATE = "2022-01-01"
 DEFAULT_END_DATE = "2026-12-31"
-
-# 初始资金 (CNY)
-INITIAL_CAPITAL = 100_000.0
 
 # 精选观察股票列表
 # 选择标准: 10万本金能买至少1手(100股), 行业分散, 流动性好

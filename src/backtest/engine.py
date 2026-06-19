@@ -5,8 +5,6 @@
 """
 import backtrader as bt
 import pandas as pd
-from datetime import datetime
-from pathlib import Path
 from config.ashare_rules import INITIAL_CAPITAL
 from .ashares_broker import AShareCommission
 
@@ -179,19 +177,3 @@ class BacktestEngine:
         print(f"  Winning/Losing:    {results['winning_trades']}/{results['losing_trades']}")
         print("=" * 60)
 
-    def get_equity_curve(self) -> pd.DataFrame:
-        """获取权益曲线"""
-        if not self._strategies:
-            return pd.DataFrame()
-
-        strat = self._strategies[0]
-        equity = []
-        for analyzer in strat.analyzers:
-            try:
-                analysis = analyzer.get_analysis()
-                if "rtn" in str(analysis):
-                    continue
-            except Exception:
-                pass
-
-        return pd.DataFrame()

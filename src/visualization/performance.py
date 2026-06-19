@@ -9,7 +9,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-from pathlib import Path
 from config.settings import PLOT_STYLE, CHARTS_DIR
 
 plt.rcParams.update(PLOT_STYLE)

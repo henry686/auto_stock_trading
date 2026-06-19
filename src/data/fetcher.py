@@ -42,25 +42,6 @@ def _format_date(date_str: str) -> str:
     return date_str.replace("-", "")
 
 
-def get_stock_list() -> pd.DataFrame:
-    """
-    获取 A 股股票列表
-
-    Returns:
-        DataFrame with columns: symbol, name, market
-    """
-    try:
-        df = ak.stock_zh_a_spot_em()
-        result = pd.DataFrame()
-        result["symbol"] = df["代码"]
-        result["name"] = df["名称"]
-        result["market"] = result["symbol"].apply(_classify_market)
-        return result
-    except Exception as e:
-        print(f"[Warning] 获取股票列表失败: {e}")
-        raise
-
-
 def fetch_daily_kline(
     symbol: str,
     start_date: str = DEFAULT_START_DATE,
@@ -180,33 +161,3 @@ def fetch_index_daily(
         raise
 
 
-def get_trade_date_hist(
-    start_date: str = "20200101",
-    end_date: str = "20251231",
-) -> list:
-    """
-    获取 A 股交易日历
-
-    Returns:
-        交易日日期列表
-    """
-    try:
-        df = ak.tool_trade_date_hist_sina()
-        df = df[(df["trade_date"] >= start_date) & (df["trade_date"] <= end_date)]
-        return df["trade_date"].tolist()
-    except Exception as e:
-        print(f"[Error] 获取交易日历失败: {e}")
-        raise
-
-
-def _classify_market(symbol: str) -> str:
-    """根据股票代码判断所属市场"""
-    code = str(symbol).strip()
-    if code.startswith("6"):
-        return "上海"
-    elif code.startswith(("0", "3", "2")):
-        return "深圳"
-    elif code.startswith("8") or code.startswith("4"):
-        return "北京"
-    else:
-        return "未知"

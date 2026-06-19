@@ -16,11 +16,8 @@ import argparse
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-import backtrader as bt
 from src.data.storage import load_from_parquet
-from src.indicators.calculator import add_all_indicators
 from src.backtest.engine import BacktestEngine
-from src.backtest.analyzers import print_metrics_report, calculate_all_metrics
 from src.backtest.reporter import generate_report, save_report_json
 from src.strategy.ma_crossover import MACrossoverBT
 from config.settings import INITIAL_CAPITAL
@@ -57,18 +54,9 @@ def run_backtest(
 
     # 6. 打印和保存结果
     engine.print_summary()
+    bt_results = engine.get_results()
 
-    # 7. 计算额外指标
-    if results:
-        # 获取回测的核心结果
-        bt_results = engine.get_results()
-
-        # 打印详细指标
-        # 创建简化的 equity 序列用于自定义分析
-        from src.backtest.analyzers import calculate_all_metrics
-        # 这里可以通过 backtrader 的 TimeReturn 分析器获取日收益率
-
-    # 8. 保存报告
+    # 7. 保存报告
     report = generate_report(
         results=bt_results,
         metadata={

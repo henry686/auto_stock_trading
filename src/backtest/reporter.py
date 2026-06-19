@@ -68,26 +68,3 @@ def save_report_json(report: dict, filename: str = None) -> Path:
     return filepath
 
 
-def print_report(report: dict):
-    """打印完整报告到控制台"""
-    meta = report.get("metadata", {})
-    perf = report.get("performance", {})
-
-    print("\n" + "=" * 60)
-    print("  BACKTEST REPORT")
-    print("=" * 60)
-
-    # 元数据
-    print("\n--- Metadata ---")
-    for key, value in meta.items():
-        print(f"  {key}: {value}")
-
-    # 绩效
-    print("\n--- Performance ---")
-    for key, value in perf.items():
-        if isinstance(value, float):
-            print(f"  {key}: {value:.4f}")
-        else:
-            print(f"  {key}: {value}")
-
-    print("=" * 60)

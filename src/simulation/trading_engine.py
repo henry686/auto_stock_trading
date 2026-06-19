@@ -16,7 +16,7 @@ from src.utils.types_ import AccountState
 from src.utils.calendar import get_calendar
 from src.simulation.account import VirtualAccount
 from src.simulation.order_manager import OrderManager
-from src.strategy.ma_crossover import MACrossoverStrategy
+from src.strategy.base import BaseStrategy
 from config.ashare_rules import INITIAL_CAPITAL, LOT_SIZE, calculate_total_fee
 
 
@@ -25,7 +25,8 @@ class SimulationEngine:
     模拟交易引擎
 
     用法:
-        engine = SimulationEngine(initial_cash=10000.0)
+        from src.strategy.ma_crossover import MACrossoverStrategy
+        engine = SimulationEngine(initial_cash=100000.0)
         engine.load_data('600036', df)
         engine.add_strategy(MACrossoverStrategy(short_period=5, long_period=20))
         report = engine.run()

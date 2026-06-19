@@ -27,24 +27,6 @@ def save_to_csv(df: pd.DataFrame, filename: str, directory: Path = DATA_RAW_DIR)
     return filepath
 
 
-def load_from_csv(filename: str, directory: Path = DATA_RAW_DIR) -> pd.DataFrame:
-    """
-    从 CSV 文件加载 DataFrame
-
-    Args:
-        filename: 文件名
-        directory: 目录
-
-    Returns:
-        DataFrame
-    """
-    filepath = directory / filename
-    if not filepath.exists():
-        raise FileNotFoundError(f"文件不存在: {filepath}")
-    df = pd.read_csv(filepath, encoding="utf-8-sig", parse_dates=["date"])
-    return df
-
-
 def save_to_parquet(df: pd.DataFrame, symbol: str, directory: Path = DATA_PROCESSED_DIR) -> Path:
     """
     保存清洗后的数据为 Parquet 格式
@@ -81,13 +63,3 @@ def load_from_parquet(symbol: str, directory: Path = DATA_PROCESSED_DIR) -> pd.D
     return pd.read_parquet(filepath)
 
 
-def list_available_symbols(directory: Path = DATA_PROCESSED_DIR) -> list[str]:
-    """
-    列出目录下所有已存储的股票代码
-
-    Returns:
-        股票代码列表
-    """
-    if not directory.exists():
-        return []
-    return sorted([f.stem for f in directory.glob("*.parquet")])

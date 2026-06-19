@@ -71,35 +71,3 @@ class AShareCommission(bt.CommInfoBase):
         return commission + stamp + transfer
 
 
-class T1Observer(bt.Observer):
-    """
-    T+1 卖出限制观察器
-
-    记录当天是否买入，用于阻止当天卖出。
-    注意：backtrader 本身不强制执行 T+1，需要通过策略配合使用。
-
-    推荐做法：在策略的 next() 中检查此 observer 的值，
-    如果当天有新买入，则跳过卖出信号。
-    """
-
-    lines = ("can_sell",)
-    plotinfo = dict(plot=False)
-
-    def next(self):
-        # 检查是否有新买入（今天买入的不能在今天卖出）
-        # 简化处理：如果持仓量的变化是增加，说明今天有买入
-        pos = self._owner.getposition(self.data)
-        if len(self.data) > 0:
-            # 比较今天和昨天的持仓
-            today_size = pos.size
-            yesterday_size = getattr(self, "_yesterday_size", 0)
-
-            if today_size > yesterday_size:
-                # 今天有净买入 -> T+1 限制明天才能卖出
-                self.lines.can_sell[0] = 0
-            else:
-                self.lines.can_sell[0] = 1
-
-            self._yesterday_size = today_size
-        else:
-            self.lines.can_sell[0] = 1
