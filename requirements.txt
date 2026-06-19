@@ -1,0 +1,15 @@
+# Data
+akshare>=1.18.0
+pandas>=2.1.0
+numpy>=1.26.0
+
+# Backtesting
+backtrader>=1.9.78
+
+# Visualization
+matplotlib>=3.8.0
+mplfinance>=0.12.10a0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0

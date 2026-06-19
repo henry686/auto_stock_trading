@@ -1,0 +1,7 @@
+-r requirements.txt
+
+# Development
+pytest>=8.0
+black>=24.0
+jupyterlab>=4.0
+ipykernel>=6.0
